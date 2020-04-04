@@ -1,0 +1,340 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- font awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
+          integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+    <title>Vocabulary Trainer</title>
+    <style>
+        header {
+        background: url('../static/images/nightlife.jpg');
+         background-size:cover;
+         background-position: center;
+         min-height:400px;
+         }
+
+         @media screen and (max-width: 670px) {
+            header {min-height: 120px;}
+         }
+         section {
+         padding-top: 4vw;
+         padding-bottom: 4vw;
+         }
+        .card-content {
+            min-height:150px;
+        }
+
+    </style>
+    <script>
+        var numCards = 4;
+        var activeFlashCard = 1;
+        var learnedWords = []
+    </script>
+</head>
+<body>
+
+<!-- navbar -->
+<header>
+    <nav class="nav-wrapper black">
+
+        <div class="container">
+            <a href="" class="brand-logo">Vocabulary Trainer</a>
+            <a href="" class="sidenav-trigger" data-target="mobile-menu"><i class="material-icons">menu</i></a>
+            <ul class="right hide-on-med-and-down">
+                <li><a href="#vocabpractice">Vocab Practice</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <ul class="sidenav grey lighten-2" id="mobile-menu">
+                <li><a href="#service">Service</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+
+    </nav>
+
+</header>
+
+
+
+<!-- Modal Structure -->
+
+<div  class="modal" id="flashcard-modal">
+    <div class="modal-content">
+        <div class="row">
+            <div class="col s12 l12 center hide modal-success">
+                <p class="flow-text">You have learned the entire extracted vocabulary</p>
+                <a target="_blank" href="http://www.weekly.khan.co.kr/khnm.html?mode=view&amp;artid=202003061432451&amp;code=116">
+                    Now try to read the article
+                </a>
+
+            </div>
+            <div class="col s12 l6 flashcard">
+            <div class="card z-depth-2">
+                <div class="card-content">
+                    <h6>Source</h6>
+
+                    <p id="flashcard1" class="sourceText hide">노래를</p>
+
+                    <p id="flashcard2" class="sourceText hide">사랑</p>
+
+                    <p id="flashcard3" class="sourceText hide">내가</p>
+
+                    <p id="flashcard4" class="sourceText hide">같아</p>
+
+
+                </div>
+            </div>
+            </div>
+            <div class="col s12 l6 flashcard">
+            <div class="card z-depth-2" onclick="toggleTranslation()">
+                <div class="card-content">
+                    <h6>Click to show the translation</h6>
+
+                    <p id="flashcard1_trans" class="translationText hide">song</p>
+
+                    <p id="flashcard2_trans" class="translationText hide">love</p>
+
+                    <p id="flashcard3_trans" class="translationText hide">I</p>
+
+                    <p id="flashcard4_trans" class="translationText hide">same</p>
+
+                    <p id="learned_checkbox" class="hide">
+                        <label>
+                            <input type="checkbox" id="learned_word" onclick="markLearnedWord()"/>
+                            <span>Learned</span>
+                        </label>
+                    </p>
+
+                </div>
+            </div>
+            </div>
+
+        </div>
+    </div>
+    <!--<div class="container s12 center">-->
+        <!--<button class="btn pink darken-4" onclick="toggleTranslation()">Show-->
+            <!--Translation-->
+        <!--</button>-->
+    <!--</div>-->
+    <div class="container s12 center">
+        <button class="btn pink darken-4" onclick="shuffleCards()">Show
+            Next
+        </button>
+    </div>
+
+    <div class="modal-footer">
+        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
+    </div>
+</div>
+
+
+
+<section class="container section scrollspy" id="service">
+
+    <div class="row">
+        <div class="col s12" id="vocabpractice">
+            <p class="flow-text">
+                Vocabulary Practice
+            </p>
+            <p>Enter an article URL from one of the following sites:</p>
+            <ul>
+                <li><a target="_blank" href="https://www.hankookilbo.com/">https://www.hankookilbo.com/</a></li>
+                <li><a target="_blank" href="http://www.weekly.khan.co.kr/">http://www.weekly.khan.co.kr/</a></li>
+            </ul>
+            <form action="" method="post">
+                <input type="hidden" name="csrfmiddlewaretoken" value="xK0SiQAMhyklBu4cKsUT4lOvHcDQ2IuPkfPTzvgsMBrCCMUNj5hC7mCb3J9iy172">
+                <div class="input-field">
+                    <i class="material-icons prefix">web</i>
+                    <tr><th><label for="id_page_url">Enter an article URL:</label></th><td><input type="text" name="page_url" value="http://www.weekly.khan.co.kr/khnm.html?mode=view&amp;artid=202003061432451&amp;code=116" maxlength="1500" required id="id_page_url"></td></tr>
+                </div>
+                <div class="input-field center">
+                    <button class="btn pink darken-4">Submit</button>
+                </div>
+
+            </form>
+        </div>
+
+    </div>
+</section>
+
+<div class="divider">$nbsp;</div>
+
+<section class="container section scrollspy" id="queryResults">
+
+
+    <div class="row {{ display }}">
+        <div class="col s12 center">
+            <button data-target="flashcard-modal" class="btn modal-trigger pink darken-4" onclick="getCard(1);">Show Flash Cards</button>
+
+        </div>
+    </div>
+    <div class="row hide">
+        <div class="col s12 l6" id="pagecontent">
+            <h4>{{ page_title }}</h4>
+            <div>{{ page_body }}</div>
+        </div>
+        <div class="col s12 l6">
+            {% for kt in keywords_translations %}
+            <div class="col s6 l5 offset-l2">{{ kt.0 }}</div>
+            <div class="col s6 l5">{{ kt.1 }}</div>
+            {% endfor %}
+        </div>
+
+    </div>
+</section>
+
+<!-- parallax -->
+
+<div class="parallax-container">
+    <div class="parallax">
+        <img src="../static/images/couple.jpg" alt="" class="responsive-img">
+    </div>
+</div>
+
+<!-- contact form -->
+
+<section class="section container scrollspy" id="contact">
+    <div class="row">
+        <div class="col s12 l5">
+            <h2 class="pink-text text-darken-4"">
+            Get In Touch
+            </h2>
+            <p>For questions or suggestions, please contact me:</p>
+        </div>
+    </div>
+    <div class="col s12 l5 offset-l2">
+        <form action="">
+            <div class="input-field">
+                <i class="material-icons prefix">email</i>
+                <input type="email" id="email">
+                <label for="email">Your email</label>
+            </div>
+            <div class="input-field">
+                <i class="material-icons prefix">message</i>
+                <textarea name="" id="message" class="materialize-textarea"></textarea>
+                <label for="message">Your message</label>
+            </div>
+            <div class="input-field center">
+                <button class="btn pink darken-4">Submit</button>
+            </div>
+
+        </form>
+    </div>
+
+</section>
+
+<!-- footer -->
+<footer class="page-footer grey darken-3">
+    <div class="container" id="about">
+        <div class="row">
+            <div class="col s12 l6">
+                <h5>About me</h5>
+                <p>I am a language-loving programmer from Dublin</p>
+                <p>
+            </div>
+            <div class="col s12 l4 offset-l2">
+                <h5>Connect</h5>
+                <ul>
+                    <li><a href="https://www.linkedin.com/in/heididuchting/" target="_blank"
+                           class="grey-text text-lighten-3"><i class="fab fa-instagram"></i>&nbsp;&nbsp;Instagram</a>
+                    </li>
+                    <li><a href="https://www.instagram.com/heidihasphoto/" target="_blank"
+                           class="grey-text text-lighten-3"><i class="fab fa-linkedin"></i>&nbsp;&nbsp;LinkedIn</a></li>
+                </ul>
+            </div>
+
+        </div>
+        <div class="footer-copyright grey darken-4">
+            <div class="container center-align">
+                &copy; 2020 Vocabulary Trainer
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- Compiled and minified JavaScript -->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $('.sidenav').sidenav();
+        $('.parallax').parallax();
+        $('.scrollspy').scrollSpy();
+        $('.modal').modal();
+    });
+
+    function getCard(idx) {
+        var elId = '#flashcard' + idx;
+        activeFlashCard = idx;
+        $('.sourceText').addClass('hide')
+        document.getElementById('learned_word').checked = false;
+        $('#learned_checkbox').addClass('hide')
+        $('.translationText').addClass('hide')
+        $(elId).removeClass('hide')
+    }
+
+    function randomNumber(min, max, exclude) {
+        let res = -1;
+        while(res == -1 || exclude.includes(res)) {
+            res = Math.floor(Math.random() * (max - min) + min);
+        }
+        return res;
+    }
+
+    function shuffleCards() {
+        let exclude = [...learnedWords];
+        if (!exclude.includes(activeFlashCard)) {
+            exclude.push(activeFlashCard);
+        }
+
+        let possibleCards = [...Array(numCards).keys()].map( i => i+1);
+        let newIdx = activeFlashCard;
+        if (possibleCards.length - exclude.length > 0) {
+            console.log('get random');
+            newIdx = randomNumber(1, numCards+1, exclude);
+        } else {
+            console.log('learned everything!');
+            showAllLearned()
+        }
+        getCard(newIdx)
+    }
+
+    function showAllLearned() {
+        $('.modal-success').removeClass('hide');
+        $('.flashcard').addClass('hide');
+
+    }
+
+    function toggleTranslation() {
+        console.log(activeFlashCard)
+        var elId = '#flashcard' + activeFlashCard + '_trans';
+        $('.translationText').addClass('hide')
+        $(elId).removeClass('hide')
+        $('#learned_checkbox').removeClass('hide')
+    }
+
+    function markLearnedWord() {
+        console.log(activeFlashCard);
+        learnedStatus = document.getElementById('learned_word').checked
+        if(learnedStatus === true && !learnedWords.includes(activeFlashCard)) {
+            learnedWords.push(activeFlashCard)
+        } else {
+            console.log('add code to filter out unlearned')
+        }
+        console.log(learnedWords)
+    }
+
+
+
+</script>
+
+</body>
+</html>
