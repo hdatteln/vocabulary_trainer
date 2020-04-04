@@ -1,0 +1,5 @@
+django
+requests
+beautifulsoup4
+googletrans
+scikit-learn
