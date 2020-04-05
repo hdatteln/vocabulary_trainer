@@ -16,6 +16,12 @@ class Translator():
         except:
             return 'Could not get translation'
 
+    def get_keyword_translations(self, keyword_extractor, input_text):
+        keywords = keyword_extractor.get_keywords(input_text)
+        keywords = [word for word in keywords if not word.isnumeric()]
+        translations = [self.translate(word) for word in keywords]
+        return list(zip(keywords, translations))
+
 
 class KeywordExtractor(models.Model):
     stopwords = frozenset(set([]))
@@ -68,6 +74,9 @@ class PracticeText(models.Model):
     title = models.CharField(max_length=500)
     body = models.TextField()
     vocab = models.TextField(default='[]')
+
+    def set_from_text(self, page_text):
+        self.body = page_text
 
     def set_from_url(self, page_url):
         self.web_url = page_url

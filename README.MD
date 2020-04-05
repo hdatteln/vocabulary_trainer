@@ -1,6 +1,7 @@
 # Vocabulary Trainer
 The vocabulary trainer is a small application that supports Korean language learning.
-It takes selected Korean web article URLs as an input, extracts key vocabulary from those articles, and then displays flash cards for learning that vocabulary.
+A user can enter either a Korean web article URL (via the `URL INPUT` tab), or some Korean text (via the `TEXT INPUT` tab).
+The application then extracts key vocabulary from the input text, and displays flash cards for learning that vocabulary.
 
 The goal is to better understand the Korean article afterwards.
 

@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .forms import PageUrlForm
+from .forms import PageUrlForm, PageTextForm
 from .models import PracticeText, KeywordExtractor, Translator
 import json
 from ast import literal_eval
@@ -24,44 +24,44 @@ def index(request):
     # if this is a POST request we need to process the form data
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:
-        form = PageUrlForm(request.POST)
+        urlForm = PageUrlForm(request.POST)
+        textForm = PageTextForm(request.POST)
         # check whether it's valid:
-        if form.is_valid():
-            # Make PracticeText from URL
-            query_url = form.cleaned_data['page_url']
-
+        if urlForm.is_valid():
+            query_url = urlForm.cleaned_data['page_url']
             try:
                 practice_text = PracticeText.objects.get(web_url=query_url)
             except:
-                practice_text.set_from_url(form.cleaned_data['page_url'])
+                practice_text.set_from_url(urlForm.cleaned_data['page_url'])
             page_title = practice_text.title
             page_body = practice_text.body
-
-            keywords = kwe.get_keywords(page_title + ' ' + page_body)
-            keywords = [word for word in keywords if not word.isnumeric()]
-
-            translations = [translator.translate(word) for word in keywords]
-            keywords_translations = list(zip(keywords, translations))
+            keywords_translations = translator.get_keyword_translations(kwe, page_title + ' ' + page_body)
+            print(keywords_translations)
             practice_text.vocab = json.dumps(keywords_translations)
             practice_text.save()
             practice_text_id = PracticeText.objects.only('id').get(web_url=query_url).id
             flashcard_trigger = 'true'
 
+        elif textForm.is_valid():
+            query_text = textForm.cleaned_data['page_text']
+            practice_text.set_from_text(query_text)
+            keywords_translations = translator.get_keyword_translations(kwe, practice_text.body)
+            flashcard_trigger = 'true'
 
         else:
             page_title = 'Could not be found'
 
-
     else:
-        form = PageUrlForm()
+        urlForm = PageUrlForm()
+        textForm = PageTextForm()
 
     return render(request, 'index.html', {
-        'form': form,
+        'urlForm': urlForm,
+        'textForm': textForm,
         'page_url': query_url,
         'keywords_translations': keywords_translations,
         'practice_text_id': practice_text_id,
         'flashcard_trigger': flashcard_trigger
-
     })
 
 

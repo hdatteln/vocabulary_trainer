@@ -1,10 +1,58 @@
-.listline {
-    display: block;
-}
-.hide {
-    display: none
+a {
+    color: #ad1457;
 }
 
-.show {
-    display: block
+header {
+    background: url('../static/images/nightlife.jpg');
+    background-size:cover;
+    background-position: center;
+    min-height:400px;
+}
+
+@media screen and (max-width: 670px) {
+	header {min-height: 120px;}
+}
+section {
+	padding-top: 4vw;
+	padding-bottom: 4vw;
+}
+.card-content {
+	min-height:150px;
+}
+
+.parallax-container {
+	position: relative;
+	overflow: hidden;
+	height: 300px;
+}
+.tabs .tab a{
+	color:#880e4f;
+}
+
+.tabs .tab a:hover {
+	background-color:#fafafa;
+	color:#880e4f;
+}
+
+.tabs .tab a.active {
+	background-color:#fce4ec;
+	color:#880e4f
+}
+
+.tabs .indicator {
+	background-color:#880e4f;
+}
+
+textarea.materialize-textarea:focus:not([readonly]) {
+	border-bottom: 1px solid #880e4f;
+	box-shadow: 0 1px 0 0 #880e4f;
+}
+
+input[type=text]:not(.browser-default):focus:not([readonly]) {
+	border-bottom: 1px solid #880e4f;
+	box-shadow: 0 1px 0 0 #880e4f;
+}
+
+.input-field .prefix.active {
+	color: #880e4f;
 }
