@@ -36,7 +36,6 @@ def index(request):
             page_title = practice_text.title
             page_body = practice_text.body
             keywords_translations = translator.get_keyword_translations(kwe, page_title + ' ' + page_body)
-            print(keywords_translations)
             practice_text.vocab = json.dumps(keywords_translations)
             practice_text.save()
             practice_text_id = PracticeText.objects.only('id').get(web_url=query_url).id

@@ -1,8 +1,14 @@
 from django import forms
+from django.core.validators import URLValidator
 
 
 class PageUrlForm(forms.Form):
-    page_url = forms.CharField(label='Enter an article URL', max_length=1500)
+    page_url = forms.URLField(
+        label='Enter an article URL',
+        max_length=1500,
+        validators=
+        [URLValidator(message='Please enter a valid URL')]
+    )
 
 
 class PageTextForm(forms.Form):
