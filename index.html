@@ -1,7 +1,78 @@
-<h1>Vocabulary Trainer</h1>
-<p>The vocabulary trainer is a small application that supports Korean language learning.
-    A user can enter either a Korean web article URL (via the `URL INPUT` tab), or some Korean text (via the `TEXT INPUT` tab).
-    The application then extracts key vocabulary from the input text, and displays flash cards for learning that vocabulary.</p>
-<p>The goal is to better understand the Korean article afterwards.</p>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Vocabulary Trainer</title>
+    <decription>Korean vocabulary trainer</decription>
+    <style>
+        body {
+            margin: 60px auto;
+            width: 70%;
+        }
+        nav ul, footer ul {
+            font-family:'Helvetica', 'Arial', 'Sans-Serif';
+            padding: 0;
+            list-style: none;
+            font-weight: bold;
+        }
+        nav ul li, footer ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+        a {
+            text-decoration: none;
+            color: #999;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        h1 {
+            font-size: 3em;
+            font-family:'Helvetica', 'Arial', 'Sans-Serif';
+        }
+        p {
+            font-size: 1.5em;
+            line-height: 1.4em;
+            color: #333;
+        }
+        footer {
+            border-top: 1px solid #d5d5d5;
+            font-size: .8em;
+        }
 
-<a target="_blank" href="https://github.com/hdatteln/vocabulary_trainer">Link to project on GitHub</a>
+        ul.posts {
+            margin: 20px auto 40px;
+            font-size: 1.5em;
+        }
+
+        ul.posts li {
+            list-style: none;
+        }
+
+    </style>
+</head>
+<body>
+<!--<nav>-->
+<!--    <ul>-->
+<!--        <li><a href="/">Home</a></li>-->
+<!--        <li><a href="/about">About</a></li>-->
+<!--        <li><a href="/cv">CV</a></li>-->
+<!--        <li><a href="/blog">Blog</a></li>-->
+<!--    </ul>-->
+<!--</nav>-->
+<div class="container">
+    <div class="blurb">
+        <h1>Vocabulary Trainer</h1>
+        <p>The vocabulary trainer is a small application that supports Korean language learning.
+            A user can enter either a Korean web article URL (via the `URL INPUT` tab), or some Korean text (via the `TEXT INPUT` tab).
+            The application then extracts key vocabulary from the input text, and displays flash cards for learning that vocabulary.</p>
+        <p>The goal is to better understand the Korean article afterwards.</p>
+
+        <a target="_blank" href="https://github.com/hdatteln/vocabulary_trainer">Link to project on GitHub</a>
+    </div><!-- /.blurb -->
+</div><!-- /.container -->
+<footer>
+    <ul>
+    </ul>
+</footer>
+</body>
+</html>
