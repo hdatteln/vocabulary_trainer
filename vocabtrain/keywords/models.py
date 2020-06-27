@@ -96,8 +96,9 @@ class PracticeText(models.Model):
         article_markups = [
             ['article'],
             ['div', {'class': 'article_body'}],
-            ['div', {'class': 'col-main'}],
-            ['div', {'id': '_article'}]
+            ['div', {'class': 'end-body'}],
+            ['div', {'id': '_article'}],
+            ['div', {'class': 'v_article'}]
         ]
 
         while page_body is None:
